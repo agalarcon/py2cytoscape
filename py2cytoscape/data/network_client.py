@@ -166,6 +166,9 @@ class NetworkClient(object):
 
     def get(self, id):
         return self.session.get(self.__url + '/' + str(id)).json()
+    
+    def getCynetwork(self, id):
+        return CyNetwork(id, session=self.session, url=self.__url)
 
     def delete_all(self):
         self.session.delete(self.__url)
