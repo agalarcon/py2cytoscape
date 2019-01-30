@@ -1,4 +1,5 @@
 import requests
+import re
 
 HEADERS = {'Content-Type': 'application/json'}
 
@@ -14,8 +15,8 @@ class LayoutClient(object):
     def apply(self, name='force-directed', network=None):
         if network is None:
             raise ValueError('Target network is required')
-
-        url = self.__url + '/' + name + '/' + str(network.get_id())
+        string = re.sub('[^0-9]', '', str(network.get_id()))
+        url = self.__url + '/' + name + '/' + string
         requests.get(url)
 
     def bundle_edge(self, network=None):
